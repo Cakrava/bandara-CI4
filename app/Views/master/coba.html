@@ -1,0 +1,201 @@
+<form>
+    <label for="tiket">Jumlah Tiket:</label>
+    <input type="number" id="tiket" name="tiket" min="1" max="20" value="1">
+    <br>
+    <label for="kursi">Nomor Kursi:</label>
+
+
+    <div id="div-container">
+        <div id="kursi-container">
+            <div class="kursi">1</div>
+           <div class="kursi">2</div>
+           <div class="kursi">3</div>
+           <div class="kursi">4</div>
+           <div class="kursi">5</div>
+           
+               </div>
+               <div class="kursi-row" id="kursi-row">
+                   <div id="kursi-container">
+              
+                   <div class="kursi">6</div>
+                   <div class="kursi">7</div>
+                   <div class="kursi">8</div>
+                   <div class="kursi">9</div>
+                   <div class="kursi">10</div>
+                   </div>
+                   </div>
+           
+                   <div class="kursi-row" id="kursi-row-3">
+                       <div id="kursi-container">
+                       
+                   
+                       <div class="kursi">11</div>
+                       <div class="kursi">12</div>
+                       <div class="kursi">13</div>
+                       <div class="kursi">14</div>
+                       <div class="kursi">15</div>
+                       </div>
+                       </div>
+
+                       
+      </div>
+      
+      <button id="prev-btn">Prev</button>
+      <button id="next-btn">Next</button>
+
+   
+</form>
+<style>
+ 
+    #kursi-row {
+  display: flex;
+  flex-direction: row;
+}
+
+    #kursi-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.kursi {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ccc;
+  text-align: center;
+  line-height: 50px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.kursi.selected {
+  background-color: rgb(116, 175, 252);
+}
+
+
+</style>
+<script>
+    
+    
+
+    
+    let tiketInput = document.getElementById("tiket");
+let kursiContainer = document.getElementById("kursi-container");
+let kursirow = document.getElementById("kursi-row");
+let kursirow3 = document.getElementById("kursi-row-3");
+let kursi = kursiContainer.querySelectorAll(".kursi");
+
+let tiketDipilih = 0;
+
+tiketInput.addEventListener("change", function() {
+  let tiket = parseInt(this.value);
+  
+  // Nonaktifkan semua kotak kursi
+  kursi.forEach(function(k) {
+    k.classList.remove("selected");
+    k.style.pointerEvents = "auto";
+  });
+  
+  tiketDipilih = 0;
+});
+
+kursiContainer.addEventListener("click", function(event) {
+  if (event.target.classList.contains("kursi")) {
+    if (event.target.classList.contains("selected")) {
+      event.target.classList.remove("selected");
+      tiketDipilih--;
+    } else if (tiketDipilih < tiketInput.value) {
+      event.target.classList.add("selected");
+      tiketDipilih++;
+    }
+  }
+});
+
+
+kursirow.addEventListener("click", function(event) {
+  if (event.target.classList.contains("kursi")) {
+    if (event.target.classList.contains("selected")) {
+      event.target.classList.remove("selected");
+      tiketDipilih--;
+    } else if (tiketDipilih < tiketInput.value) {
+      event.target.classList.add("selected");
+      tiketDipilih++;
+    }
+  }
+});
+
+kursirow3.addEventListener("click", function(event) {
+  if (event.target.classList.contains("kursi")) {
+    if (event.target.classList.contains("selected")) {
+      event.target.classList.remove("selected");
+      tiketDipilih--;
+    } else if (tiketDipilih < tiketInput.value) {
+      event.target.classList.add("selected");
+      tiketDipilih++;
+    }
+  }
+});
+
+</script>
+
+
+
+<script>
+    let divContainer = document.getElementById("div-container");
+  let prevBtn = document.getElementById("prev-btn");
+  let nextBtn = document.getElementById("next-btn");
+  
+  for (let i = 1; i <= 100; i++) {
+    let div = document.createElement("div");
+    div.classList.add("div");
+    div.innerText = i;
+    divContainer.appendChild(div);
+  }
+  
+  let divs = divContainer.querySelectorAll(".div");
+  let currentPage = 0;
+  
+  function showPage(page) {
+    // Sembunyikan semua div
+    divs.forEach(function(div) {
+      div.style.display = "none";
+    });
+    
+    // Tampilkan div sesuai halaman yang dipilih
+    for (let i = page * 20; i < (page + 1) * 20; i++) {
+      divs[i].style.display = "block";
+    }
+  }
+  
+  prevBtn.addEventListener("click", function() {
+    if (currentPage > 0) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  nextBtn.addEventListener("click", function() {
+    let currentPage = 1;
+let kotakPerHalaman = 20;
+
+function showKotak(kotak, page) {
+let start = (page - 1) * kotakPerHalaman;
+let end = page * kotakPerHalaman;
+kotak.slice(start, end).forEach(function(k) {
+k.style.display = "block";
+});
+}
+
+function hideKotak(kotak, page) {
+let start = (page - 1) * kotakPerHalaman;
+let end = page * kotakPerHalaman;
+kotak.slice(start, end).forEach(function(k) {
+k.style.display = "none";
+});
+}
+
+nextBtn.addEventListener("click", function() {
+hideKotak(kotak, currentPage);
+currentPage++;
+showKotak(kotak, currentPage);
+});
+});

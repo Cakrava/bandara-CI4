@@ -1,0 +1,180 @@
+<html>
+
+<head>
+  <script>
+    function cekRute() {
+      var asal = document.getElementById("asal").value;
+      var tujuan = document.getElementById("tujuan").value;
+      var tarif = document.getElementById("tarif");
+      var jadwal = document.getElementById("jadwal");
+      var kelas = document.getElementById("kelas").value;
+      var maskapai = document.getElementById("maskapai").value;
+      var tiketAnak = document.getElementById("anak").value;
+  var tiketDewasa = document.getElementById("dewasa").value;
+  if (tiketAnak === "") {
+    tiketAnak = 0;
+}
+
+if (tiketDewasa === "") {
+    tiketDewasa = 0;
+}
+  var totalTiket = parseInt(tiketAnak) + parseInt(tiketDewasa);
+  document.getElementById("tiket").value = totalTiket;
+ 
+
+      var total = 0;
+      if ((asal == "Padang" && tujuan == "Jakarta") || (asal == "Jakarta" && tujuan == "Padang") ){
+        keterangan.value = "Rute tersedia";
+        tarif.value = "500000";
+        
+      
+        jadwal.innerHTML = "<option value='19.00'>19.00 WIB</option><option value='22.00'>22.00 WIB</option>";
+      }
+        
+      else if (asal == "Padang" && tujuan == "Bengkulu") {
+        keterangan.value = "Rute tersedia";
+        tarif.value = "Rp.350.000";
+        jadwal.innerHTML = "<option value='20.00'>20.00 WIB</option  <option value='07.00'>07.00 WIB</option>";
+      }
+      else {
+        tarif.value = "";
+        jadwal.innerHTML = "";
+        keterangan.value = "Rute tidak tersedia";
+        
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+      if (maskapai == "Garuda") {
+        if (kelas == "bisnis") {
+          total += 300000;
+          
+        }
+        else if (kelas == "ekonomi") {
+          total += 250000;
+        }
+      }
+      else if (maskapai == "Lion Air") {
+        if (kelas == "bisnis") {
+          total += 200000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 100000;
+        }
+      }
+      else if (maskapai == "Citilink") {
+        if (kelas == "bisnis") {
+          total += 250000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 200000;
+        }
+      }
+
+      else if (maskapai == "Asia Link") {
+        if (kelas == "bisnis") {
+          total += 100000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 50000;
+        }
+      }
+      else if (maskapai == "Batik Air") {
+        if (kelas == "bisnis") {
+          total += 150000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 100000;
+        }
+      }
+      else if (maskapai == "Mandala Air") {
+        if (kelas == "bisnis") {
+          total += 120000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 80000;
+        }
+      }
+
+      else {
+        if (kelas == "bisnis") {
+          total += 70000;
+        }
+        else if (kelas == "ekonomi") {
+          total += 40000;
+        }
+      }
+
+
+
+
+        var     ta=(total * parseInt(tiketAnak))/2/2;
+        var     td=(total * parseInt(tiketDewasa));
+        var     tt=(ta+td); 
+
+    //   document.getElementById("total").value = total;
+      tt += parseInt(tarif.value.replace("Rp. ", "").replace(".", ""));
+    //   total += parseInt(tarif.value.replace("Rp. ", "").replace(".", ""));
+
+      document.getElementById("total").value = "Rp. " + tt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  </script>
+</head>
+
+<body>
+  <form>
+    <label for="asal">Asal:</label><br>
+    <input type="text" id="asal" onkeyup="cekRute()"><br>
+    <label for="tujuan">Tujuan:</label><br>
+    <input type="text" id="tujuan" onkeyup="cekRute()"><br>
+
+      <label for="dewasa">Tiket Dewasa:</label><br>
+    <input type="text" id="dewasa" onkeyup="cekRute()"><br>
+     <label for="anak">Tiket Anak:</label><br>
+    <input type="text" id="anak" onkeyup="cekRute()"><br>
+    
+    
+    <label for="maskapai">Maskapai:</label><br>
+    <select name="maskapai" class="form-control" id="maskapai" onchange="cekRute()">
+      <option value="">Pilih Maskapai</option>
+      <option value="Garuda">Garuda</option>
+      <option value="Lion Air">Lion Air</option>
+      <option value="Citilink">Citilink</option>
+      <option value="Mandala Air">Mandala Air</option>
+      <option value="Batik Air">Batik Air</option>
+      <option value="Asia Link">Asia Link</option>
+    </select><br>
+    <label for="kelas">Kelas:</label><br>
+    <select name="kelas" class="form-control" id="kelas" onchange="cekRute()">
+      <option value="">Pilih Kelas</option>
+      <option value="bisnis">Bisnis</option>
+      <option value="ekonomi">Ekonomi</option>
+    </select><br>
+    <label for="jadwal">--------------------------------------------------------</label><br>
+
+    <label for="jadwal">Jadwal:</label><br>
+    <select id="jadwal"></select><br>
+  
+    <label for="tiket">Jumlah Tiket</label><br>
+    <input type="tiket" id="tiket" readonly><br>
+    
+<label for="tarif">Tarif:</label><br>
+    <input type="text" id="tarif" readonly><br>
+    
+    <label for="total">Total:</label><br>
+    <input type="text" id="total" readonly>
+    <br>
+    <label for="keterangan">Keterangan:</label><br>
+    <input type="text" id="keterangan" readonly>
+  
+  </form>
