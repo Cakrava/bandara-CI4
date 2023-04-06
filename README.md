@@ -1,4 +1,4 @@
-sebuah latihan can sebuah tugas akhir dari matakuliah WEB 2, dimana dengan tema pemesanan tiket, meski ga bagus sih jd kek gini
+sebuah latihan dan sebuah tugas akhir dari matakuliah WEB 2, dimana dengan tema pemesanan tiket, meski ga bagus sih jd kek gini
 
 ![s1](https://user-images.githubusercontent.com/61378415/230362036-5d322f27-ab53-4b37-adf5-8f2971ed5b70.jpg)
 
